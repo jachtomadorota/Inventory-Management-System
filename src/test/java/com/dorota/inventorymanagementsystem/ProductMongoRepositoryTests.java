@@ -4,23 +4,28 @@ package com.dorota.inventorymanagementsystem;
 import com.dorota.inventorymanagementsystem.model.Product;
 import com.dorota.inventorymanagementsystem.repository.ProductMongoRepository;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import static org.junit.Assert.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
 
-@SpringBootTest(classes = InventoryManagementSystemApplication.class)
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class ProductMongoRepositoryTests {
 
     @Autowired
     private ProductMongoRepository productRepository;
 
-    @BeforeAll
+    @Before
     public void setUp() throws Exception {
         Product shampoo = new Product("502334", "Alterna Caviar Moisture szampon 250ml", "Alterna", "szampon", 23, BigDecimal.valueOf(45), BigDecimal.valueOf(64), BigDecimal.valueOf(110), BigDecimal.valueOf(95));
         Product conditioner = new Product("502364", "Alterna Caviar Moisture odżywka 250ml", "Alterna", "odżywka", 23, BigDecimal.valueOf(45), BigDecimal.valueOf(64), BigDecimal.valueOf(110), BigDecimal.valueOf(95));
@@ -44,7 +49,7 @@ public class ProductMongoRepositoryTests {
     @Test
     public void updateData() throws Exception{
         Product product = this.productRepository.findProductByEAN("502334");
-        product.setEAN("502333");
+        product.setEAN("5002333");
         this.productRepository.save(product);
         assertEquals("5002333",product.getEAN());
     }
