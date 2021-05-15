@@ -20,9 +20,9 @@ public class ProductMongoRepositoryTests {
     private ProductMongoRepository productRepository;
 
     @BeforeAll
-    public void setUp() throws Exception{
-        Product shampoo = new Product("502334","Alterna Caviar Moisture szampon 250ml","Alterna","szampon",23, BigDecimal.valueOf(45),BigDecimal.valueOf(64),BigDecimal.valueOf(110),BigDecimal.valueOf(95));
-        Product conditioner = new Product("502364","Alterna Caviar Moisture odżywka 250ml","Alterna","odżywka",23, BigDecimal.valueOf(45),BigDecimal.valueOf(64),BigDecimal.valueOf(110),BigDecimal.valueOf(95));
+    public void setUp() throws Exception {
+        Product shampoo = new Product("502334", "Alterna Caviar Moisture szampon 250ml", "Alterna", "szampon", 23, BigDecimal.valueOf(45), BigDecimal.valueOf(64), BigDecimal.valueOf(110), BigDecimal.valueOf(95));
+        Product conditioner = new Product("502364", "Alterna Caviar Moisture odżywka 250ml", "Alterna", "odżywka", 23, BigDecimal.valueOf(45), BigDecimal.valueOf(64), BigDecimal.valueOf(110), BigDecimal.valueOf(95));
         assertNull(shampoo.getId());
         assertNull(conditioner.getId());
         this.productRepository.save(shampoo);
@@ -32,13 +32,22 @@ public class ProductMongoRepositoryTests {
     }
 
     @Test
-    public void fetchingData() throws Exception{
+    public void fetchingData() throws Exception {
         Product product = this.productRepository.findProductByEAN("502334");
         assertNotNull(product);
-        assertEquals(BigDecimal.valueOf(95),product.getSellPriceWholesale());
+        assertEquals(BigDecimal.valueOf(95), product.getSellPriceWholesale());
         List<Product> products = this.productRepository.findAll();
-        assertEquals(products.size(),2);
+        assertEquals(products.size(), 2);
     }
+
+    @Test
+    public void updateData() throws Exception{
+        Product product = this.productRepository.findProductByEAN("502334");
+        product.setEAN("502333");
+        this.productRepository.save(product);
+        assertEquals("5002333",product.getEAN());
+    }
+
 
 
 }
