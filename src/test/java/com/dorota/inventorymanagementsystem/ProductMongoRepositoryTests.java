@@ -3,6 +3,7 @@ package com.dorota.inventorymanagementsystem;
 
 import com.dorota.inventorymanagementsystem.model.Product;
 import com.dorota.inventorymanagementsystem.repository.ProductMongoRepository;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,9 @@ public class ProductMongoRepositoryTests {
     }
 
 
+    @After
+    public void deletingData() throws Exception{
+        this.productRepository.deleteAll();
+    }
 
 }
