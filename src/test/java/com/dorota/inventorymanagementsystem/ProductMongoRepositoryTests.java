@@ -3,11 +3,14 @@ package com.dorota.inventorymanagementsystem;
 
 import com.dorota.inventorymanagementsystem.model.Product;
 import com.dorota.inventorymanagementsystem.repository.ProductMongoRepository;
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.Assert.*;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 
 @SpringBootTest(classes = InventoryManagementSystemApplication.class)
@@ -26,6 +29,15 @@ public class ProductMongoRepositoryTests {
         this.productRepository.save(conditioner);
         assertNotNull(shampoo.getId());
         assertNotNull(conditioner.getId());
+    }
+
+    @Test
+    public void fetchingData() throws Exception{
+        Product product = this.productRepository.findProductByEAN("502334");
+        assertNotNull(product);
+        assertEquals(BigDecimal.valueOf(95),product.getSellPriceWholesale());
+        List<Product> products = this.productRepository.findAll();
+        assertEquals(products.size(),2);
     }
 
 
