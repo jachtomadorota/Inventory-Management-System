@@ -115,4 +115,17 @@ public class Product {
     public void setSellPriceWholesale(BigDecimal sellPriceWholesale) {
         this.sellPriceWholesale = sellPriceWholesale;
     }
+
+
+    public Product(String EAN, String name, String producer, String category, int VAT, BigDecimal purchasePriceNetto, BigDecimal purchasePriceBrutto, BigDecimal sellPriceRetail, BigDecimal sellPriceWholesale) {
+        this.EAN = EAN;
+        this.name = name;
+        this.producer = producer;
+        this.category = category;
+        this.VAT = VAT;
+        this.purchasePriceNetto = purchasePriceNetto;
+        this.purchasePriceBrutto = purchasePriceBrutto;
+        this.sellPriceRetail = sellPriceRetail;
+        this.sellPriceWholesale = sellPriceWholesale;
+    }
 }
